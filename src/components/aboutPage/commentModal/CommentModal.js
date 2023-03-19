@@ -15,12 +15,12 @@ const CommentModal = ({id, open, setModal}) => {
     const [comment, setComment] = useState("");
     const user = localStorage.getItem("user") !== null ? JSON.parse(localStorage.getItem("user")) : false;
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
         setModal(false);
         if (user) {
-            dispatch(addComment({id: id, text: comment, access: access}));
-            dispatch(getComments(id));
+            await dispatch(addComment({id: id, text: comment, access: access}));
+            await dispatch(getComments(id));
         } else alert("Вы не зарегистрированы!");
     };
 
